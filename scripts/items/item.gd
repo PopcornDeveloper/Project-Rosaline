@@ -1,15 +1,22 @@
+@tool
 extends Node3D
-class_name Item
+class_name ITEM
 
 func _use():
 	pass
 
 
 
-@export var LeftHand_ArmLeftDesiredPosition : Vector3
-@export var RightHand_ArmLeftDesiredPosition : Vector3
-@export var LeftHand_ArmRightDesiredPosition : Vector3
-@export var RightHand_ArmRightDesiredPosition : Vector3
+@export var LeftHand_ArmLeftMoveBackAmount : float
+@export var RightHand_ArmLeftMoveBackAmount : float 
+@export var LeftHand_ArmRightMoveBackAmount : float 
+@export var RightHand_ArmRightMoveBackAmount : float
+
+@export var LeftHand_ArmLeftMoveDownAmount : float
+@export var RightHand_ArmLeftMoveDownAmount : float 
+@export var LeftHand_ArmRightMoveDownAmount : float 
+@export var RightHand_ArmRightMoveDownAmount : float
+
 
 @export var pos_in_left_hand : Vector3
 @export var pos_in_right_hand : Vector3
@@ -18,8 +25,6 @@ func _use():
 @export var RightHand : Node3D
 @export var LeftHandTarget : Marker3D
 @export var RightHandTarget : Marker3D
-@export var LeftArmHandNode : Node3D
-@export var RightArmHandNode : Node3D
 @export var RightArm : Node3D
 @export var LeftArm : Node3D 
 @export var two_handed : bool
@@ -56,22 +61,21 @@ func _process(delta: float) -> void:
 
 	if two_handed:
 		if get_parent() == LeftHand:
-			var t = get_tree().create_tween()
+		
+			#I just had a revelation.
+			# I can use the handle system like the one from roblox
+			# I can put the gun in the fucking hand. Then I can offset it and only figure out the other hand. I have no clue why the shit I did not think of this.
 
-			#t.tween_property(LeftArm, "position", LeftHand_ArmLeftDesiredPosition, 0.05).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
-			#t.tween_property(RightArm, "position", LeftHand_ArmRightDesiredPosition, 0.05).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
-			
 			RightHandTarget.global_position = lerp(RightHandTarget.global_position,HandleLeft.global_position, 5 * delta)
 			LeftHandTarget.global_position = lerp(LeftHandTarget.global_position,HandleRight.global_position, 5 * delta)
 			
-			LeftArm.mesh.position.z = lerp(LeftArm.mesh.position.z, -LeftArmHandNode.global_position.distance_to(RightHandTarget.global_position) * 0.2, 10 * delta)
-			RightArm.mesh.position.z = lerp(RightArm.mesh.position.z, RightArmHandNode.global_position.distance_to(LeftHandTarget.global_position) * 1, 10 * delta)
+			#urrrgh someone help me please
+			RightArm.global_position.z = lerp(RightArm.global_position.z, HandleLeft.global_position.z + (1 * LeftHand_ArmRightMoveBackAmount), 10 * delta)
+			LeftArm.global_position.z = lerp(LeftArm.global_position.z, HandleRight.global_position.z + (1* LeftHand_ArmLeftMoveBackAmount), 10 * delta)
+			RightArm.global_position.y = lerp(RightArm.global_position.y, HandleLeft.global_position.y + (1 * LeftHand_ArmRightMoveDownAmount), 10 * delta)
+			LeftArm.global_position.y = lerp(LeftArm.global_position.y, HandleRight.global_position.y + (1 * LeftHand_ArmLeftMoveDownAmount), 10 * delta)
 		else:
-			var t = get_tree().create_tween()
 
-			t.tween_property(LeftArm, "position", RightHand_ArmLeftDesiredPosition, 0.05).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
-			t.tween_property(RightArm, "position", RightHand_ArmRightDesiredPosition, 0.05).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
-			
 			RightHandTarget.global_position = lerp(RightHandTarget.global_position,HandleRight.global_position, 5 * delta)
 			LeftHandTarget.global_position = lerp(LeftHandTarget.global_position,HandleLeft.global_position, 5 * delta)
 

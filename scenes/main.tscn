@@ -48,3 +48,8 @@ poop = NodePath("../CharacterBody3D")
 
 [node name="CharacterBody3D" parent="." instance=ExtResource("1_o5qli")]
 transform = Transform3D(1, 0, -5.9604645e-08, 0, 1, 0, 5.9604645e-08, 0, 1, 1.4303842, 1.5619092, -21.663404)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(0.3994052, -0.9167745, 0, 0.9167745, 0.3994052, 0, 0, 0, 1, -1.3237305, -8.049256, -6.696289)
+use_collision = true
+size = Vector3(19.569336, 10.963745, 14.392578)

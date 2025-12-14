@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="fpsthingig"
+config/name="Project Rosaline"
 run/main_scene="uid://e8j4q5nih7bg"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 proc="*res://scripts/utils/procanim.gd"
+g="*res://scripts/utils/global.gd"
 
 [display]
 
@@ -72,7 +73,7 @@ use={
 textures/canvas_textures/default_texture_filter=3
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
-lights_and_shadows/directional_shadow/soft_shadow_filter_quality=0
+lights_and_shadows/directional_shadow/soft_shadow_filter_quality=5
 camera/depth_of_field/depth_of_field_bokeh_shape=0
 camera/depth_of_field/depth_of_field_bokeh_quality=0
 anti_aliasing/quality/msaa_3d=2

@@ -46,7 +46,7 @@ func _process(delta: float) -> void:
 	if is_on_floor():
 		if Input.is_action_just_pressed("jump"):
 			velocity.y = 2.5
-	head.rotation_degrees.x = clampf(head.rotation_degrees.x, -55, 89.9 / 2)
+	head.rotation_degrees.x = clampf(head.rotation_degrees.x, -70, 80)
 
 	if Input.is_action_pressed("forward"):
 		direction.z -= 1.0

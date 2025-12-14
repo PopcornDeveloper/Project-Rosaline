@@ -135,6 +135,9 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_u7tny")
 
+[sub_resource type="BoxMesh" id="BoxMesh_d2wvv"]
+size = Vector3(0.085, 0.275, 0.525)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bu6aw"]
 albedo_color = Color(0.5176471, 0.011764706, 0.19215687, 1)
 normal_enabled = true
@@ -174,9 +177,6 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_jmpgs")
 
-[sub_resource type="BoxMesh" id="BoxMesh_d2wvv"]
-size = Vector3(0.085, 0.275, 0.525)
-
 [sub_resource type="ArrayMesh" id="ArrayMesh_8jol5"]
 _surfaces = [{
 "aabb": AABB(-1.0791926, -2.732555, -1.0791926, 2.1583853, 3.7594185, 2.1583853),
@@ -214,6 +214,7 @@ height = 10.338135
 
 [node name="CharacterBody3D" type="CharacterBody3D" node_paths=PackedStringArray("head", "camera", "procanim_handler", "torso")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.8022772)
+wall_min_slide_angle = 0.5131268
 script = ExtResource("1_cvunv")
 sensitivity = 2.5
 head = NodePath("Mesh/Torso/Head")
@@ -339,13 +340,13 @@ transform = Transform3D(0.19, 0, 0, 0, 0.19, 0, 0, 0, 0.19, 0, 0.36108556, 0)
 script = ExtResource("5_tuyoq")
 player = NodePath("..")
 LeftLeg = NodePath("LeftLeg")
-RightArm = NodePath("Torso/Head/hands/RightHand/RightArm")
-LeftArm = NodePath("Torso/Head/hands/LeftHand/LeftArm")
+RightArm = NodePath("Torso/Head/RightArm")
+LeftArm = NodePath("Torso/Head/RightArm2")
 LeftHand = NodePath("Torso/Head/hands/LeftHand")
 RightHand = NodePath("Torso/Head/hands/RightHand")
 
 [node name="LeftLeg" type="Node3D" parent="Mesh" node_paths=PackedStringArray("pointer")]
-transform = Transform3D(-4.3712564e-08, 0.81503737, -0.004068491, 0.020198321, 0.0033152034, 0.9998241, 0.9998312, -6.693722e-05, -0.020198178, -0.9672978, -3.6554708, 0)
+transform = Transform3D(-3.3832745e-08, 0.8150477, -0.004261075, 0.004426716, 0.003472821, 1.0000131, 0.7739973, -1.9826444e-05, -0.005719366, -0.9673246, -3.905429, 0.08387184)
 rotation_order = 0
 script = ExtResource("5_qlg0r")
 pointer = NodePath("../../Pointer/Legs/LeftLegPointer2")
@@ -357,7 +358,7 @@ mesh = SubResource("ArrayMesh_lh6yq")
 skeleton = NodePath("")
 
 [node name="RightLeg" type="Node3D" parent="Mesh" node_paths=PackedStringArray("pointer")]
-transform = Transform3D(-4.3711708e-08, 0.8000395, -0.011635186, 1.6242431e-07, 0.009308524, 1.0000091, 1.000075, 3.3456654e-08, -1.6292216e-07, 0.79142416, -3.653534, 0)
+transform = Transform3D(-3.3830617e-08, 0.8000475, -0.0119659435, -0.011723236, 0.009572103, 0.99989814, 0.77392095, 0.00014503172, 0.015146304, 0.79142064, -3.8112607, 0.08387184)
 rotation_order = 0
 script = ExtResource("5_qlg0r")
 pointer = NodePath("../../Pointer/Legs/RightLegPointer2")
@@ -385,6 +386,7 @@ transform = Transform3D(5.2631564, 0, 0, 0, 5.2631564, 0, 0, 0, 5.2631564, 0.036
 
 [node name="Camera3D" type="Camera3D" parent="Mesh/Torso/Head" node_paths=PackedStringArray("player")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2578075, -0.22582373)
+rotation_order = 0
 fov = 98.4
 near = 0.001
 script = ExtResource("2_g2els")
@@ -398,44 +400,21 @@ mesh = SubResource("ArrayMesh_d1xjm")
 skeleton = NodePath("")
 
 [node name="hands" type="Node3D" parent="Mesh/Torso/Head"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.656613e-10, -0.41597584, -0.4234478)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.656613e-10, -0.13162291, -0.4234478)
 
 [node name="LeftHand" type="Node3D" parent="Mesh/Torso/Head/hands"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5273762, 0.3357492)
 
-[node name="LeftArm" type="Node3D" parent="Mesh/Torso/Head/hands/LeftHand" node_paths=PackedStringArray("pointer")]
-transform = Transform3D(-5.410722e-09, 0.15189141, 0.11420807, -0.069872685, 0.101935305, -0.13554089, -0.13821876, -0.051530592, 0.06851897, 0.42460635, -0.70843244, -0.013292432)
-rotation_order = 0
-script = ExtResource("5_qlg0r")
-pointer = NodePath("../../leftArmPointer")
-trans = 8
-ease = 3
-
-[node name="LeftArm" type="MeshInstance3D" parent="Mesh/Torso/Head/hands/LeftHand/LeftArm"]
-transform = Transform3D(0.999955, -0.009471446, 4.1401e-10, 0, -4.3711385e-08, -0.99999976, 0.009471446, 0.99995506, -4.3709417e-08, 0, 0, 0)
-mesh = SubResource("ArrayMesh_jso7m")
-skeleton = NodePath("")
-
-[node name="HandLocationLeft" type="Node3D" parent="Mesh/Torso/Head/hands/LeftHand/LeftArm"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.7694114e-10, -2.6780014)
-
 [node name="Node3D" type="Node3D" parent="Mesh/Torso/Head/hands/LeftHand" node_paths=PackedStringArray("LeftHand", "RightHand", "LeftHandTarget", "RightHandTarget", "RightArm", "LeftArm", "HandleLeft", "HandleRight")]
-transform = Transform3D(1, 6.500632e-07, 1.2278593e-05, -6.5099454e-07, 1, 0, -1.2263692e-05, 0, 1, 0.119578645, -0.27003628, -0.43980193)
+transform = Transform3D(1, 6.5099454e-07, 1.2263692e-05, -6.5099454e-07, 1, -7.972175e-12, -1.2263692e-05, -1.1421419e-14, 1, 0.11957129, -0.49988765, -1.0258071)
+rotation_order = 0
 script = ExtResource("9_y4r1p")
-LeftHand_ArmLeftMoveBackAmount = 0.183
-RightHand_ArmLeftMoveBackAmount = 0.055
-LeftHand_ArmRightMoveBackAmount = 0.203
-RightHand_ArmRightMoveBackAmount = -0.321
-LeftHand_ArmLeftMoveDownAmount = -0.362
-RightHand_ArmLeftMoveDownAmount = 0.16
-LeftHand_ArmRightMoveDownAmount = -0.134
-RightHand_ArmRightMoveDownAmount = -0.237
 LeftHand = NodePath("..")
 RightHand = NodePath("../../RightHand")
-LeftHandTarget = NodePath("../../leftArmPointer")
-RightHandTarget = NodePath("../../RightArmPointer2")
-RightArm = NodePath("../../RightHand/RightArm")
-LeftArm = NodePath("../LeftArm")
+LeftHandTarget = NodePath("../../RightArmPointer")
+RightHandTarget = NodePath("../../LeftArmPointer2")
+RightArm = NodePath("../../../RightArm")
+LeftArm = NodePath("../../../RightArm2")
 two_handed = true
 HandleLeft = NodePath("HandleLeft")
 HandleRight = NodePath("HandleRight")
@@ -452,28 +431,36 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.07639611, 0.24350955)
 [node name="RightHand" type="Node3D" parent="Mesh/Torso/Head/hands"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5273762, 0.3357492)
 
-[node name="RightArm" type="Node3D" parent="Mesh/Torso/Head/hands/RightHand" node_paths=PackedStringArray("pointer")]
-transform = Transform3D(-3.596006e-09, 0.12419589, -0.16028146, -0.12771831, -0.10732168, -0.05629281, -0.08430739, 0.16258295, 0.08527869, -0.24763015, -0.560263, -0.32343936)
-rotation_order = 0
-script = ExtResource("5_qlg0r")
-pointer = NodePath("../../RightArmPointer2")
-trans = 8
-ease = 3
+[node name="LeftArmPointer2" type="Marker3D" parent="Mesh/Torso/Head/hands"]
+transform = Transform3D(0.19049758, 7.5440687e-07, 1.830136e-07, 1.8860149e-07, 5.492941e-06, -0.19049756, -7.5440664e-07, 0.19049758, 5.507842e-06, -0.5029873, -0.95417935, 0.4406327)
 
-[node name="RightArm" type="MeshInstance3D" parent="Mesh/Torso/Head/hands/RightHand/RightArm"]
+[node name="RightArmPointer" type="Marker3D" parent="Mesh/Torso/Head/hands"]
+transform = Transform3D(0.19049594, 1.1368685e-12, -1.6691775e-14, -4.274528e-14, -8.305166e-09, -0.19049594, -9.094948e-13, 0.19049594, -8.305166e-09, 0.46072263, -0.113784224, -0.27267814)
+gizmo_extents = 0.95
+
+[node name="RightArm2" type="Node3D" parent="Mesh/Torso/Head"]
+transform = Transform3D(-6.7668573e-09, 0.1900116, 0.005648529, -0.15480989, 0.00016513454, -0.0055534146, -0.004527271, -0.005647055, 0.18989883, 0.48248842, -0.26680642, 0.035621047)
+rotation_order = 0
+
+[node name="LeftArm" type="MeshInstance3D" parent="Mesh/Torso/Head/RightArm2"]
+transform = Transform3D(0.999955, -0.009471446, 4.1401e-10, 0, -4.3711385e-08, -0.99999976, 0.009471446, 0.99995506, -4.3709417e-08, 0, 0, 0)
+mesh = SubResource("ArrayMesh_jso7m")
+skeleton = NodePath("")
+
+[node name="HandLocationLeft" type="Node3D" parent="Mesh/Torso/Head/RightArm2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.7694114e-10, -2.6780014)
+
+[node name="RightArm" type="Node3D" parent="Mesh/Torso/Head"]
+transform = Transform3D(-6.6892873e-09, 0.23109725, -0.0017446957, -0.0035261032, 0.0021206527, 0.19002655, 0.15299886, 4.888393e-05, 0.0043794652, -0.5105941, -0.25729394, 0.0362792)
+rotation_order = 0
+
+[node name="RightArm" type="MeshInstance3D" parent="Mesh/Torso/Head/RightArm"]
 transform = Transform3D(0.99999905, -0.0014565737, 5.1291412e-11, 0, -4.371139e-08, -0.8055965, 0.0014565738, 0.9999989, -3.5213702e-08, 0, 0, 0)
 mesh = SubResource("ArrayMesh_drpu5")
 skeleton = NodePath("")
 
-[node name="HandLocationRight" type="Node3D" parent="Mesh/Torso/Head/hands/RightHand/RightArm"]
+[node name="HandLocationRight" type="Node3D" parent="Mesh/Torso/Head/RightArm"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.450581e-09, 2.9081093e-09, -2.7624154)
-
-[node name="RightArmPointer2" type="Marker3D" parent="Mesh/Torso/Head/hands"]
-transform = Transform3D(0.19042853, 7.5414346e-07, 1.8294774e-07, 1.8853564e-07, 5.492941e-06, -0.19042851, -7.5414323e-07, 0.19042853, 5.507842e-06, 0.13390547, 0.1011132, -0.19068837)
-
-[node name="leftArmPointer" type="Marker3D" parent="Mesh/Torso/Head/hands"]
-transform = Transform3D(0.19042693, 1.1368685e-12, -1.6691775e-14, -4.272959e-14, -8.305166e-09, -0.19042693, -9.094948e-13, 0.19042693, -8.305166e-09, 0.11958158, 0.18094373, 0.13945758)
-gizmo_extents = 0.95
 
 [node name="StepTargetHolder" type="Node3D" parent="Mesh"]
 
@@ -494,6 +481,7 @@ top_level = true
 transform = Transform3D(0.77990353, 0, -0.0126818875, 0, 1.0000007, 0, 0.012278935, 0, 0.80549705, 0.85768086, -9.348102, 9.48567)
 script = ExtResource("9_ur7pv")
 step_target = NodePath("../../../Mesh/StepTargetHolder/RightLegPointer2")
+step_distance = 0.3
 adjacent_target = NodePath("../LeftLegPointer2")
 player = NodePath("../../..")
 leg = NodePath("../../../Mesh/RightLeg")

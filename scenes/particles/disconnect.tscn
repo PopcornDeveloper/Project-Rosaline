@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://dgfwf7seaet56"]
+
+[sub_resource type="Curve" id="Curve_o75dy"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1e-05, 0.14396882), 0.0, 0.0, 0, 0, Vector2(0.1126116, 1), 6.4887767, 6.4887767, 0, 0, Vector2(0.84404767, 0), -1.0572723, -1.0572723, 0, 0, Vector2(1, 0), 1.7651519, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveTexture" id="CurveTexture_6djsc"]
+curve = SubResource("Curve_o75dy")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_exvks"]
+emission_shape = 3
+emission_box_extents = Vector3(1, 2.99, 1)
+angle_min = -720.2
+angle_max = 720.0
+direction = Vector3(0, 1, 0)
+spread = 0.0
+initial_velocity_min = 1.0
+initial_velocity_max = 2.0
+gravity = Vector3(0, 0, 0)
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_6djsc")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7lb8m"]
+albedo_color = Color(1, 0.6, 0, 1)
+emission_enabled = true
+emission = Color(11.168829, 9.927648, 0, 1)
+emission_energy_multiplier = 70.54
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_5rhj1"]
+material = SubResource("StandardMaterial3D_7lb8m")
+radius = 0.008
+
+[node name="GPUParticles3D" type="GPUParticles3D"]
+emitting = false
+amount = 246
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_exvks")
+draw_pass_1 = SubResource("CapsuleMesh_5rhj1")

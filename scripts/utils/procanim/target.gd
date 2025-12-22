@@ -22,10 +22,10 @@ func step():
 	var prevlegy = 0 ## don't ask why this is a variable
 	var step_tween2 = get_tree().create_tween()
 	step_tween2.tween_property(leg.mesh, "position:z", prevlegy + 0.5, 0.05).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-	step_tween2.tween_property(self, "global_position", half_way + player.velocity * 0.4 + Vector3(0,0,0), 0.05).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	step_tween2.tween_property(self, "global_position", half_way + player.arji * 0.4 + Vector3(0,0,0), 0.05).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	await get_tree().create_timer(0.1).timeout
 	step_tween2 = get_tree().create_tween()
 	step_tween2.tween_property(leg.mesh,"position:z", prevlegy, 0.05).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
-	step_tween2.tween_property(self, "global_position", target_position + player.velocity * 0.4, 0.05).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	step_tween2.tween_property(self, "global_position", target_position + player.arji * 0.4, 0.05).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	await get_tree().create_timer(0.2).timeout
 	is_stepping = false

@@ -4,13 +4,23 @@ class_name ITEM
 func _use():
 	pass
 
-@export var pos_in_left_hand : Vector3
-@export var pos_in_right_hand : Vector3
+
+@export var OneHanded_LeftHandDesiredPosition :Vector3
+@export var TwoHanded_LeftHandDesiredPosition :Vector3
+
+@export var OneHanded_RightHandDesiredPosition :Vector3
+@export var TwoHanded_RightHandDesiredPosition :Vector3
+
+@export var MainArmForwardMovement : float = 0
+@export var OtherArmForwardMovement : float = 3
+@export var MainArmVerticalMovement : float = 0
+@export var OtherArmVerticalMovement : float = 0
+
+@export var HandlePositionY : float
+@export var HandlePositionZ : float
 
 @export var LeftHand : Node3D
 @export var RightHand : Node3D
-@export var LeftHandTarget : Marker3D
-@export var RightHandTarget : Marker3D
 @export var RightArm : Node3D
 @export var LeftArm : Node3D 
 @export var two_handed : bool
@@ -21,51 +31,38 @@ var is_two_handed : bool
 var mouse_mov : Vector2
 
 func _ready():
-	equip(LeftArm)
-func _input(event: InputEvent) -> void: 
-	if event is InputEventMouseMotion:
-		mouse_mov = event.relative 
+	await get_tree().create_timer(1).timeout
+	equip(LeftArm, RightArm)
 
 func is_one_handed():
-	var counter : int = 0
-	for i in LeftHand.get_parent().get_children():
-		for i_2 in i.get_children():
-			if i_2.get_child_count() > 0:
-				counter += 1
-	if counter == 2:
-		return true
-	elif counter == 1:
-		return false
+	if get_parent() == LeftHand:
+		return RightHand.get_child_count() > 0
+	elif get_parent() == RightHand:
+		return LeftHand.get_child_count() > 0
 	else:
-		push_error("yuor code suks!!! counter count exceeded 2!!!. Counter count: " + str(counter))
+		print("Tried to check if is one-handed in another node besides the RightHand and LeftHand, parent is" + str(get_parent().name))
 var current : bool = false
 
-func equip(arm : Node3D):
-	arm.add_child(self)
-	global_position = arm.global_position + -arm.transform.basis.z * 2.8
-	global_rotation_degrees = arm.global_rotation_degrees
+func equip(arm : Node3D, prev_arm: Node3D):
+	arm.look_at(HandleRight.global_position)
+	
+	if not is_one_handed():
+		var main_arm_tween = get_tree().create_tween()
+		main_arm_tween.tween_property(arm, "position", arm.position - ((arm.transform.basis.z * MainArmForwardMovement) + (arm.transform.basis.y * MainArmVerticalMovement)), 0.1).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
+
+		prev_arm.look_at(HandleLeft.global_position)
+		
+		var prev_arm_tween = get_tree().create_tween()
+		prev_arm_tween.tween_property(prev_arm, "position", prev_arm.position - ((prev_arm.transform.basis.z * OtherArmForwardMovement) + (prev_arm.transform.basis.y * OtherArmVerticalMovement)), 0.1).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
+	elif is_one_handed():
+		var main_arm_tween = get_tree().create_tween()
+		main_arm_tween.tween_property(arm, "position", arm.position - ((arm.transform.basis.z * MainArmForwardMovement) + (arm.transform.basis.y * MainArmVerticalMovement)), 0.1).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
+
+
+	
 	rotation_degrees.z = 0
 
 func _process(delta: float) -> void:
-
-	mouse_mov.lerp(Vector2.ZERO, 2.5 * delta)
-
-	var movtween = create_tween()
-	movtween.tween_property(get_parent().get_parent(), "rotation_degrees", Vector3(mouse_mov.y , mouse_mov.x, 0), 1).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
-
-	if two_handed:
-		if get_parent() == LeftHand:
-		
-			#I just had a revelation.
-			# I can use the handle system like the one from roblox
-			# I can put the gun in the fucking hand. Then I can offset it and only figure out the other hand. I have no clue why the shit I did not think of this.
-			pass
-		else:
-
-			RightHandTarget.global_position = lerp(RightHandTarget.global_position,HandleRight.global_position, 5 * delta)
-			LeftHandTarget.global_position = lerp(LeftHandTarget.global_position,HandleLeft.global_position, 5 * delta)
-
-		
 	if current:
 		if Input.is_action_pressed("use"):
 			_use()

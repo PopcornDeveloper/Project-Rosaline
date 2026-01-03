@@ -2,17 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ce8llnwuoy737"
-path.s3tc="res://.godot/imported/crosshair.png-226e785e0f22bb09c3ce42bf42008081.s3tc.ctex"
+uid="uid://cytv7iegtv7gc"
+path.s3tc="res://.godot/imported/Blender R6_Roblox-Shirt.png-be86b6bb22d49215a68f4eb70ae91516.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={
+"md5": "71bfdc99ccaffb09cb7db2d558309116"
+}
 
 [deps]
 
-source_file="res://textures/crosshair.png"
-dest_files=["res://.godot/imported/crosshair.png-226e785e0f22bb09c3ce42bf42008081.s3tc.ctex"]
+source_file="res://models/Blender R6_Roblox-Shirt.png"
+dest_files=["res://.godot/imported/Blender R6_Roblox-Shirt.png-be86b6bb22d49215a68f4eb70ae91516.s3tc.ctex"]
 
 [params]
 

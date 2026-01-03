@@ -2,17 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ce8llnwuoy737"
-path.s3tc="res://.godot/imported/crosshair.png-226e785e0f22bb09c3ce42bf42008081.s3tc.ctex"
+uid="uid://cjo5lnn20hrrn"
+path.s3tc="res://.godot/imported/m1911_DefaultMaterial_Metallic-DefaultMaterial_Roughness.png-955baf6651f0e20cb105ff928c02d197.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={
+"md5": "52e8566e9cee23ed0d9164ad3bb12f24"
+}
 
 [deps]
 
-source_file="res://textures/crosshair.png"
-dest_files=["res://.godot/imported/crosshair.png-226e785e0f22bb09c3ce42bf42008081.s3tc.ctex"]
+source_file="res://models/guns/pistol_a/m1911_DefaultMaterial_Metallic-DefaultMaterial_Roughness.png"
+dest_files=["res://.godot/imported/m1911_DefaultMaterial_Metallic-DefaultMaterial_Roughness.png-955baf6651f0e20cb105ff928c02d197.s3tc.ctex"]
 
 [params]
 

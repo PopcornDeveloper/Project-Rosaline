@@ -2,17 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ce8llnwuoy737"
-path.s3tc="res://.godot/imported/crosshair.png-226e785e0f22bb09c3ce42bf42008081.s3tc.ctex"
+uid="uid://h7ptrgpa6170"
+path.s3tc="res://.godot/imported/Blender R6_R15rig22_diff.png-3655d386eccb273205073423f5cd518e.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={
+"md5": "e35380b3f0b67fdca6023f3a91e90a33"
+}
 
 [deps]
 
-source_file="res://textures/crosshair.png"
-dest_files=["res://.godot/imported/crosshair.png-226e785e0f22bb09c3ce42bf42008081.s3tc.ctex"]
+source_file="res://models/Blender R6_R15rig22_diff.png"
+dest_files=["res://.godot/imported/Blender R6_R15rig22_diff.png-3655d386eccb273205073423f5cd518e.s3tc.ctex"]
 
 [params]
 

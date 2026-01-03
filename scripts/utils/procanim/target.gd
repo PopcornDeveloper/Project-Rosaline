@@ -16,16 +16,36 @@ func _process(delta: float) -> void:
 		step()
 
 func step():
-	is_stepping = true
-	var target_position = step_target.global_position
+	#is_stepping = true
+	#var target_position = step_target.global_position
+	#var half_way = (global_position + step_target.global_position) / 2
+	#var prevlegy = -0.714 ## don't ask why this is a variable
+	#var step_tween2 = get_tree().create_tween()
+	#
+	#step_tween2.tween_property(leg.mesh, "position:z", prevlegy + 1, 0.1).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	#
+	#step_tween2.tween_property(self, "global_position", target_position + player.arji * 0.4, 0.1).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	#step_tween2.tween_property(leg.mesh,"position:z", prevlegy, 0.1).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
+	#
+	#step_tween2 = get_tree().create_tween()
+	#
+	#is_stepping = false
+	#await get_tree.create_timer(0.3).timeou
+	var target_pos = step_target.global_position
 	var half_way = (global_position + step_target.global_position) / 2
-	var prevlegy = 0 ## don't ask why this is a variable
-	var step_tween2 = get_tree().create_tween()
-	step_tween2.tween_property(leg.mesh, "position:z", prevlegy + 0.5, 0.05).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-	step_tween2.tween_property(self, "global_position", half_way + player.arji * 0.4 + Vector3(0,0,0), 0.05).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-	await get_tree().create_timer(0.1).timeout
-	step_tween2 = get_tree().create_tween()
-	step_tween2.tween_property(leg.mesh,"position:z", prevlegy, 0.05).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
-	step_tween2.tween_property(self, "global_position", target_position + player.arji * 0.4, 0.05).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-	await get_tree().create_timer(0.2).timeout
-	is_stepping = false
+	var prevlegy = -0.714
+	is_stepping = true
+	
+	
+	var t = get_tree().create_tween()
+	
+	t.tween_property(leg.mesh, "position:z", prevlegy + 1, 0.1).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+	t.tween_property(self, "global_position", target_pos + (Vector3(player.arji.x * 0.3,0,player.arji.z * 0.3)), 0.1).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+	t.tween_callback(func():
+		var t2 = get_tree().create_tween()
+		t2.tween_property(leg.mesh, "position:z", prevlegy, 0.1).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+		t2.tween_callback(func(): is_stepping = false)
+	)
+	
+	
+	

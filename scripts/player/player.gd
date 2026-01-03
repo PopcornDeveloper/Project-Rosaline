@@ -9,7 +9,14 @@ var mouse_mov : Vector2
 @export var camera : Node3D
 @export var procanim_handler : Node3D
 @export var torso :Node3D
-@export var arji : Vector3
+@export var arji : Vector3 ## placeholder for velocity exported for proc anim of the legs
+
+@export var RightShoulder : Node3D
+@export var LeftShoulder : Node3D
+@export var LeftHand : Node3D
+@export var RightHand : Node3D
+@export var RightArm : Node3D
+@export var LeftArm : Node3D 
 
 var animating_cam : bool = false
 
@@ -30,12 +37,10 @@ func _ready() -> void:
 func animate_cam():
 	animating_cam = true
 	var t = create_tween()
-	t.tween_property(camera, "rotation:z", -PI / 512 * velocity.length() / movement_speed * 2, 0.3).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
-	await get_tree().create_timer(0.4).timeout
-	t = create_tween()
-	t.tween_property(camera, "rotation:z", PI / 512 * velocity.length() / movement_speed * 2, 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN_OUT)
-	await get_tree().create_timer(0.4).timeout
-	animating_cam = false
+	t.tween_property(camera, "rotation:z", -PI / 256, 0.3).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+	t.tween_property(camera, "rotation:z", PI / 256, 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN_OUT)
+	t.tween_callback(func(): animating_cam = false)
+	
 func _physics_process(delta: float) -> void:
 	if not is_multiplayer_authority(): return
 	arji = velocity
@@ -91,10 +96,9 @@ func _physics_process(delta: float) -> void:
 		moving = false
 	
 	procanim_handler.moving = moving
-	camera.position = ((sin(proc.timeElapsed * 8) * velocity.length() / 100) + 0.25) * camera.transform.basis.y
-	camera.position = Vector3(camera.position.x, camera.position.y, -0.25)
+	torso.position.y = ((sin(proc.timeElapsed * 12) * velocity.length() / 15) + -2.747)
 
-	hands.rotation = lerp(hands.rotation, -Vector3(mouse_mov.y, mouse_mov.x, 0) / 20, 10 * delta)
+	hands.rotation = lerp(hands.rotation, -Vector3(mouse_mov.y, mouse_mov.x, 0) / 60, 10 * delta)
 	
 	if not animating_cam and velocity.length() >= 2:
 		animate_cam()

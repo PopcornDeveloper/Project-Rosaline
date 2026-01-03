@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ce8llnwuoy737"
-path.s3tc="res://.godot/imported/crosshair.png-226e785e0f22bb09c3ce42bf42008081.s3tc.ctex"
+uid="uid://dgkgnmtunyfrh"
+path.s3tc="res://.godot/imported/flash_ribbon.png-e4e5afa40b12a347237dd68bf7602381.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://textures/crosshair.png"
-dest_files=["res://.godot/imported/crosshair.png-226e785e0f22bb09c3ce42bf42008081.s3tc.ctex"]
+source_file="res://textures/flash_ribbon.png"
+dest_files=["res://.godot/imported/flash_ribbon.png-e4e5afa40b12a347237dd68bf7602381.s3tc.ctex"]
 
 [params]
 

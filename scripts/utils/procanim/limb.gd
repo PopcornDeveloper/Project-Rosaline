@@ -1,7 +1,7 @@
 @tool
 extends Node3D
 
-
+@export var z_rotation : float
 @export var pointer : Node3D
 @onready var node_point_to : Marker3D = Marker3D.new()
 @export var desired_position : Vector3
@@ -19,4 +19,4 @@ func _ready():
 
 func _process(delta: float) -> void:
 	look_at(pointer.global_position)
-	rotation_degrees.z = -90
+	rotation_degrees.z = -90 + z_rotation

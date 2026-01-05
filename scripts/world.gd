@@ -46,6 +46,7 @@ func _on_host_button_pressed() -> void:
 	multiplayer.peer_connected.connect(add_player)
 	multiplayer.peer_disconnected.connect(remove_player)
 	
+	
 	add_player(multiplayer.get_unique_id())
 	
 	$CanvasLayer/Label.hide()
@@ -75,8 +76,10 @@ func spawn(node):
 func add_player(peer_id):
 	var player = Player.instantiate()
 	player.name = str(peer_id)
+	player.username = $CanvasLayer/MainMenu/MarginContainer/VBoxContainer/Username.text
 	add_child(player)
 	player.position.y += 1
+	
 func _on_join_button_pressed() -> void:
 	
 	if %HostOnlineID.text != null and %HostOnlineID.text != "":

@@ -1,5 +1,7 @@
 extends CharacterBody3D
+class_name Player
 
+var username : String
 var movement_speed = 4
 var moving : bool = false
 var mouse_mov : Vector2
@@ -17,6 +19,8 @@ var mouse_mov : Vector2
 @export var RightHand : Node3D
 @export var RightArm : Node3D
 @export var LeftArm : Node3D 
+@export var crosshair : Control
+@export var casing : PackedScene
 
 var animating_cam : bool = false
 
@@ -98,7 +102,7 @@ func _physics_process(delta: float) -> void:
 	procanim_handler.moving = moving
 	torso.position.y = ((sin(proc.timeElapsed * 12) * velocity.length() / 15) + -2.747)
 
-	hands.rotation = lerp(hands.rotation, -Vector3(mouse_mov.y, mouse_mov.x, 0) / 60, 10 * delta)
+	hands.rotation = lerp(hands.rotation, -Vector3(mouse_mov.y, mouse_mov.x, 0) / 120, 10 * delta)
 	
 	if not animating_cam and velocity.length() >= 2:
 		animate_cam()

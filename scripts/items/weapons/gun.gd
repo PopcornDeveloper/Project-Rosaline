@@ -1,6 +1,7 @@
 extends Item
 class_name Gun
 
+@export var magazine : Magazine
 @onready var muzzle_flash = $muzzleflash
 @export var slide : Node3D
 @export var slide_z_position_start = 2.25
@@ -27,14 +28,22 @@ func _use():
 		return
 	if can_use:
 		can_use = false
-	
-		shoot_effects.rpc()
+		
+		if magazine.current_size <= 0:
+			$dry_shoot.play()
+		else:
+			shoot_effects.rpc()
+		
+
+		magazine.current_size -= 1
 		
 		await get_tree().create_timer(use_cooldown).timeout
 		can_use = true
 
 @rpc("call_local")
 func shoot_effects():
+	$shoot.pitch_scale = randf_range(0.95,1.05)
+	$shoot.volume_linear = randf_range(0.95,1.05)
 	$shoot.play()
 	
 	var t = get_tree().create_tween()
@@ -47,3 +56,13 @@ func shoot_effects():
 		i.emitting = true
 	await get_tree().create_timer(0.06).timeout
 	recoil()
+	await get_tree().create_timer(0.5).timeout
+	$casing.play()
+
+var mrrac = 1
+
+func _physics_process(delta: float) -> void:
+	mrrac += 1
+	if mrrac % 50 == 0:
+		print(aiming)
+		print(position)

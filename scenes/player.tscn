@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=4 uid="uid://ckvo3g8u7dsrb"]
+[gd_scene load_steps=63 format=4 uid="uid://ckvo3g8u7dsrb"]
 
 [ext_resource type="Script" uid="uid://b3opj6ga7tohy" path="res://scripts/player/player.gd" id="1_cvunv"]
 [ext_resource type="Script" uid="uid://5w0nktsiisxm" path="res://scripts/player/camera.gd" id="2_g2els"]
@@ -7,14 +7,19 @@
 [ext_resource type="Script" uid="uid://byktbs77iu4f7" path="res://scripts/utils/procanim/limb.gd" id="5_qlg0r"]
 [ext_resource type="Script" uid="uid://bbgslnesqryo4" path="res://scripts/player/procanim/player_procanim.gd" id="5_tuyoq"]
 [ext_resource type="Texture2D" uid="uid://y76uavyid863" path="res://textures/normals/fabric.jpeg" id="7_smehm"]
+[ext_resource type="Script" uid="uid://gy1uxrwfpyab" path="res://scripts/hands.gd" id="8_a8ls1"]
 [ext_resource type="Script" uid="uid://cx4aktwco678d" path="res://scripts/items/weapons/gun.gd" id="8_jej6c"]
 [ext_resource type="Texture2D" uid="uid://c8oykd2dheiti" path="res://models/torso/rrobloxrig_torso_Untitled.png" id="8_ur7pv"]
+[ext_resource type="Script" uid="uid://ecbl0g83v4r" path="res://scripts/items/item.gd" id="9_60mlk"]
 [ext_resource type="Script" uid="uid://c6tc1pqg8olot" path="res://scripts/utils/procanim/target.gd" id="9_ur7pv"]
+[ext_resource type="Script" uid="uid://cupjn1fl60xfj" path="res://scripts/items/weapons/magazine.gd" id="10_qfm1y"]
 [ext_resource type="Texture2D" uid="uid://mwjtcipvevnb" path="res://models/guns/pistol_a/m1911_DefaultMaterial_BaseColor-DefaultMaterial_Alpha.png" id="11_jej6c"]
 [ext_resource type="Texture2D" uid="uid://cjo5lnn20hrrn" path="res://models/guns/pistol_a/m1911_DefaultMaterial_Metallic-DefaultMaterial_Roughness.png" id="12_f1ej7"]
 [ext_resource type="Texture2D" uid="uid://dgkgnmtunyfrh" path="res://textures/flash_ribbon.png" id="12_oprun"]
-[ext_resource type="AudioStream" uid="uid://bwig7ncleq77t" path="res://sounds/guns/pistol/9mm Single.wav" id="13_a8ls1"]
 [ext_resource type="Texture2D" uid="uid://f6yy3lu2cgn" path="res://models/guns/pistol_a/m1911_DefaultMaterial_Normal.png" id="13_oprun"]
+[ext_resource type="AudioStream" uid="uid://dbie8ifrrc68y" path="res://sounds/guns/pistol/pistol_gunshot.ogg" id="15_qfm1y"]
+[ext_resource type="AudioStream" uid="uid://xmwrb4usvua1" path="res://sounds/guns/pistol/casing.ogg" id="16_fulsm"]
+[ext_resource type="AudioStream" uid="uid://u8kkkdvcc7b5" path="res://sounds/guns/dry_fire.wav" id="17_4r5pv"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_qhqgy"]
 font = ExtResource("4_dqkch")
@@ -99,6 +104,9 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_f1ej7")
+
+[sub_resource type="BoxMesh" id="BoxMesh_60mlk"]
+size = Vector3(0.073, 0.286, 0.086)
 
 [sub_resource type="Animation" id="Animation_d2wvv"]
 resource_name = "holding"
@@ -523,16 +531,22 @@ properties/16/replication_mode = 1
 properties/17/path = NodePath("Mesh/Torso/Head/hands/LeftHand:position")
 properties/17/spawn = true
 properties/17/replication_mode = 1
-properties/18/path = NodePath("Mesh/Torso/Head/hands/RightHand/gun:aiming")
+properties/18/path = NodePath("Mesh/Torso/Head/hands/LeftHand:rotation")
 properties/18/spawn = true
 properties/18/replication_mode = 1
+properties/19/path = NodePath("Mesh/Torso/Head/hands/RightHand:rotation")
+properties/19/spawn = true
+properties/19/replication_mode = 1
 
 [sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_jej6c"]
 length = 0.18026902
 
-[node name="CharacterBody3D" type="CharacterBody3D" node_paths=PackedStringArray("head", "hands", "camera", "procanim_handler", "torso", "RightShoulder", "LeftShoulder", "LeftHand", "RightHand", "RightArm", "LeftArm")]
+[node name="CharacterBody3D" type="CharacterBody3D" node_paths=PackedStringArray("head", "hands", "camera", "procanim_handler", "torso", "RightShoulder", "LeftShoulder", "LeftHand", "RightHand", "RightArm", "LeftArm", "crosshair")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.8022772)
-wall_min_slide_angle = 0.5131268
+slide_on_ceiling = false
+wall_min_slide_angle = 1.2095132
+floor_stop_on_slope = false
+floor_max_angle = 0.91629785
 script = ExtResource("1_cvunv")
 sensitivity = 2.5
 head = NodePath("Mesh/Torso/Head")
@@ -546,6 +560,7 @@ LeftHand = NodePath("Mesh/Torso/Head/hands/LeftHand")
 RightHand = NodePath("Mesh/Torso/Head/hands/RightHand")
 RightArm = NodePath("Mesh/Torso/RightArm")
 LeftArm = NodePath("Mesh/Torso/LeftArm")
+crosshair = NodePath("CanvasLayer/Control")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -758,7 +773,7 @@ transform = Transform3D(5.2631564, 0, 0, 0, 5.2631564, 0, 0, 0, 5.2631564, 0.036
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2578075, -0.22582373)
 rotation_order = 0
 current = true
-fov = 98.4
+fov = 100.0
 near = 0.001
 script = ExtResource("2_g2els")
 player = NodePath("../../../..")
@@ -770,35 +785,65 @@ transform = Transform3D(0.19000001, 0, 0, 0, 0.19000001, 0, 0, 0, 0.19000001, 0,
 mesh = SubResource("ArrayMesh_d1xjm")
 skeleton = NodePath("")
 
-[node name="hands" type="Node3D" parent="Mesh/Torso/Head"]
+[node name="hands" type="Node3D" parent="Mesh/Torso/Head" node_paths=PackedStringArray("player")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.656613e-10, -0.050628424, -0.8408493)
+script = ExtResource("8_a8ls1")
+player = NodePath("../../../..")
 
 [node name="LeftHand" type="Node3D" parent="Mesh/Torso/Head/hands"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5273762, 0.3357492)
 
-[node name="RightHand" type="Node3D" parent="Mesh/Torso/Head/hands"]
-transform = Transform3D(0.86251366, -0.5060338, 0, 0.5060338, 0.86251366, 0, 0, 0, 1, 0, -0.421, 0.317)
-
-[node name="gun" type="Node3D" parent="Mesh/Torso/Head/hands/RightHand" node_paths=PackedStringArray("slide", "player", "HandleLeft", "HandleRight")]
-transform = Transform3D(1, 0, 0, 0, 0.9650165, -0.26218918, 0, 0.26218918, 0.9650165, 0, 0, 0)
-rotation_order = 0
-script = ExtResource("8_jej6c")
-slide = NodePath("m1911/slide")
-recoil_up = 0.169
-recoil_side = 0.024
-recoil_back = 0.04
-recoil_rotation = Vector3(0.434, 0, 0)
-automatic = true
-aiming = true
-aiming_position = Vector3(0.058, 0.222, 0.212)
-aiming_rotation = Vector3(0, 0, 0.531)
+[node name="Magazine" type="Node3D" parent="Mesh/Torso/Head/hands/LeftHand" node_paths=PackedStringArray("player", "HandleLeft", "HandleRight")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.346, 0, 0)
+script = ExtResource("9_60mlk")
+aimable = false
 player = NodePath("../../../../../..")
-two_handed = true
 HandleLeft = NodePath("HandleLeft")
 HandleRight = NodePath("HandleRight")
 
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Mesh/Torso/Head/hands/LeftHand/Magazine"]
+mesh = SubResource("BoxMesh_60mlk")
+
+[node name="HandleLeft" type="Marker3D" parent="Mesh/Torso/Head/hands/LeftHand/Magazine"]
+
+[node name="HandleRight" type="Marker3D" parent="Mesh/Torso/Head/hands/LeftHand/Magazine"]
+
+[node name="Magazine" type="Node" parent="Mesh/Torso/Head/hands/LeftHand/Magazine" node_paths=PackedStringArray("player")]
+script = ExtResource("10_qfm1y")
+full_size = 12
+current_size = 12
+type = 0
+player = NodePath("../../../../../../..")
+metadata/_custom_type_script = "uid://cupjn1fl60xfj"
+
+[node name="RightHand" type="Node3D" parent="Mesh/Torso/Head/hands"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.24, 0.187)
+
+[node name="gun" type="Node3D" parent="Mesh/Torso/Head/hands/RightHand" node_paths=PackedStringArray("magazine", "slide", "player", "HandleLeft", "HandleRight")]
+rotation_order = 0
+script = ExtResource("8_jej6c")
+magazine = NodePath("Magazine")
+slide = NodePath("m1911/slide")
+recoil_up = 0.08
+recoil_back = 0.01
+recoil_rotation = Vector3(0.4, 0, 0)
+aiming_fov_change = 80.0
+aiming_offset_x = 0.125
+aiming_offset_y = -0.025
+heftiness_lerp = 5.0
+aiming_position = Vector3(0, 0.24, 0.187)
+player = NodePath("../../../../../..")
+HandleLeft = NodePath("HandleLeft")
+HandleRight = NodePath("HandleRight")
+
+[node name="Magazine" type="Node" parent="Mesh/Torso/Head/hands/RightHand/gun" node_paths=PackedStringArray("player")]
+script = ExtResource("10_qfm1y")
+full_size = 12
+current_size = 12
+type = 0
+player = NodePath("../../../../../../..")
+
 [node name="HandleLeft" type="Marker3D" parent="Mesh/Torso/Head/hands/RightHand/gun"]
-transform = Transform3D(1, 1.400688e-19, 9.094947e-13, 1.4007944e-19, 1, -1.6940659e-21, -9.094947e-13, 8.6566767e-19, 1, -0.05093476, -0.3188751, 0.15165949)
+transform = Transform3D(1, 1.400688e-19, 9.094947e-13, 1.4007944e-19, 1, -1.6940659e-21, -9.094947e-13, 8.6566767e-19, 1, -0.05093476, -0.21403328, -0.004786987)
 
 [node name="HandleRight" type="Marker3D" parent="Mesh/Torso/Head/hands/RightHand/gun"]
 transform = Transform3D(1, 1.4006887e-19, 1.8189894e-12, 1.4010074e-19, 1, -1.7364175e-18, -1.8189894e-12, -6.7762636e-21, 1, 0.03360521, -0.2799369, -0.0052722245)
@@ -817,7 +862,7 @@ mesh = SubResource("ArrayMesh_lt0h6")
 skeleton = NodePath("")
 
 [node name="slide" type="MeshInstance3D" parent="Mesh/Torso/Head/hands/RightHand/gun/m1911"]
-transform = Transform3D(-0.01613953, 0, 0, 0, 0.10000002, -1.358962e-08, 0, 1.5099582e-08, 0.089999996, 0, 1.531178, 2.2499032)
+transform = Transform3D(-0.01613953, 0, 0, 0, 0.10000002, -1.358962e-08, 0, 1.5099582e-08, 0.089999996, -9.394443e-13, 1.5311781, 1.4586985)
 mesh = SubResource("ArrayMesh_hj6a3")
 skeleton = NodePath("")
 
@@ -874,7 +919,16 @@ draw_pass_1 = SubResource("QuadMesh_4r5pv")
 replication_config = SubResource("SceneReplicationConfig_f1ej7")
 
 [node name="shoot" type="AudioStreamPlayer3D" parent="Mesh/Torso/Head/hands/RightHand/gun"]
-stream = ExtResource("13_a8ls1")
+stream = ExtResource("15_qfm1y")
+
+[node name="casing" type="AudioStreamPlayer3D" parent="Mesh/Torso/Head/hands/RightHand/gun"]
+stream = ExtResource("16_fulsm")
+
+[node name="dry_shoot" type="AudioStreamPlayer3D" parent="Mesh/Torso/Head/hands/RightHand/gun"]
+stream = ExtResource("17_4r5pv")
+
+[node name="casing_shootout" type="Node3D" parent="Mesh/Torso/Head/hands/RightHand/gun"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.035980467, 0.05147005, -0.04914058)
 
 [node name="LeftArmPointer2" type="Marker3D" parent="Mesh/Torso/Head/hands"]
 transform = Transform3D(0.19049758, 7.5440687e-07, 1.830136e-07, 1.8860149e-07, 5.492941e-06, -0.19049756, -7.5440664e-07, 0.19049758, 5.507842e-06, -0.50298685, -0.95417607, 0.5543976)

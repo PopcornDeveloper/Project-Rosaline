@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://do7vxesmygo7h"
 path.s3tc="res://.godot/imported/roblox_r6_rigged_0.png-4ec9d1862856665716ff162ce03ffee8.s3tc.ctex"
+path.etc2="res://.godot/imported/roblox_r6_rigged_0.png-4ec9d1862856665716ff162ce03ffee8.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://models/roblox_r6_rigged_0.png"
-dest_files=["res://.godot/imported/roblox_r6_rigged_0.png-4ec9d1862856665716ff162ce03ffee8.s3tc.ctex"]
+dest_files=["res://.godot/imported/roblox_r6_rigged_0.png-4ec9d1862856665716ff162ce03ffee8.s3tc.ctex", "res://.godot/imported/roblox_r6_rigged_0.png-4ec9d1862856665716ff162ce03ffee8.etc2.ctex"]
 
 [params]
 

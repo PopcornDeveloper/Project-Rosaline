@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://cjo5lnn20hrrn"
 path.s3tc="res://.godot/imported/m1911_DefaultMaterial_Metallic-DefaultMaterial_Roughness.png-955baf6651f0e20cb105ff928c02d197.s3tc.ctex"
+path.etc2="res://.godot/imported/m1911_DefaultMaterial_Metallic-DefaultMaterial_Roughness.png-955baf6651f0e20cb105ff928c02d197.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://models/guns/pistol_a/m1911_DefaultMaterial_Metallic-DefaultMaterial_Roughness.png"
-dest_files=["res://.godot/imported/m1911_DefaultMaterial_Metallic-DefaultMaterial_Roughness.png-955baf6651f0e20cb105ff928c02d197.s3tc.ctex"]
+dest_files=["res://.godot/imported/m1911_DefaultMaterial_Metallic-DefaultMaterial_Roughness.png-955baf6651f0e20cb105ff928c02d197.s3tc.ctex", "res://.godot/imported/m1911_DefaultMaterial_Metallic-DefaultMaterial_Roughness.png-955baf6651f0e20cb105ff928c02d197.etc2.ctex"]
 
 [params]
 

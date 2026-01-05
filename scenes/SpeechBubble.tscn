@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://7rvko0qqs0xq"]
+
+[ext_resource type="FontFile" uid="uid://x5knx1vff2hs" path="res://fonts/Coolvetica Rg.otf" id="1_2gmo7"]
+[ext_resource type="Script" uid="uid://cuj172ctu4yj7" path="res://scripts/player/speech_bubble.gd" id="2_jvde8"]
+
+[node name="Label3D" type="Label3D"]
+billboard = 1
+alpha_cut = 2
+alpha_scissor_threshold = 1.0
+alpha_hash_scale = 2.0
+alpha_antialiasing_mode = 1
+texture_filter = 0
+modulate = Color(0.86, 0.9766666, 1, 1)
+outline_modulate = Color(0.0090999985, 0.03126498, 0.13, 1)
+font = ExtResource("1_2gmo7")
+font_size = 63
+outline_size = 0
+text_direction = 1
+language = "[en_US"
+script = ExtResource("2_jvde8")
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "the three wizards exploded???"
+max_lines_visible = 0
+visible_characters = 0
+visible_ratio = 0.0

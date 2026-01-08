@@ -87,35 +87,27 @@ func _process(delta: float) -> void:
 		get_parent().rotation = lerp(get_parent().rotation, Vector3.ZERO,  heftiness_lerp * delta / 2)
 	if is_one_handed():
 		if get_parent() == player.LeftHand:
-			player.LeftArm.look_at(player.LeftShoulder.global_position)
-			player.LeftArm.global_position = lerp(player.LeftArm.global_position, HandleRight.global_position, heftiness_lerp * delta * 4)
+			player.LeftArm.global_position = HandleLeft.global_position
 			if not aiming:
-				get_parent().position = lerp(get_parent().position, Vector3(-0.3,0,0), heftiness_lerp * delta * 2)
+				get_parent().position = lerp(get_parent().position, Vector3(-0.2,0,0.4), heftiness_lerp * delta * 2)
 		else:
-			player.RightArm.look_at(player.RightShoulder.global_position)
-			player.RightArm.global_position = lerp(player.RightArm.global_position, HandleRight.global_position, heftiness_lerp * delta * 4)
+			player.RightArm.global_position = HandleRight.global_position
 			
 			if not aiming:
-				get_parent().position = lerp(get_parent().position, Vector3(0.3,0,0), heftiness_lerp * delta)
+				get_parent().position = lerp(get_parent().position, Vector3(0.2,0,0.4), heftiness_lerp * delta)
 			
 	else:
 		if get_parent() == player.LeftHand:
-			player.LeftArm.look_at(player.LeftShoulder.global_position)
-			player.RightArm.look_at(player.RightShoulder.global_position)
-
-			player.LeftArm.global_position = lerp(player.LeftArm.global_position, HandleRight.global_position, heftiness_lerp * delta* 4)
-			player.RightArm.global_position = lerp(player.RightArm.global_position, HandleLeft.global_position, heftiness_lerp * delta* 4)
+			player.RightArm.global_position = HandleLeft.global_position
+			player.LeftArm.global_position = HandleRight.global_position
 			
 			if not aiming:
-				get_parent().position = lerp(get_parent().position, Vector3(-0.3,0,0), heftiness_lerp * delta)
+				get_parent().position = lerp(get_parent().position, Vector3(-0.2,0,0.4), heftiness_lerp * delta)
 		elif get_parent() == player.RightHand:
-			player.LeftArm.look_at(player.LeftShoulder.global_position)
-			player.RightArm.look_at(player.RightShoulder.global_position)
-
 			player.LeftArm.global_position = HandleLeft.global_position
 			player.RightArm.global_position = HandleRight.global_position
 			if not aiming:
-				get_parent().position = lerp(get_parent().position, Vector3(0.3,0,0), heftiness_lerp * delta)
+				get_parent().position = lerp(get_parent().position, Vector3(0.2,0,0.4), heftiness_lerp * delta)
 	if current:
 		if aimable:
 			if Input.is_action_just_pressed("aim"):

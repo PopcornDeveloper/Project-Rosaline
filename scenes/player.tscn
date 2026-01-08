@@ -600,9 +600,15 @@ properties/10/replication_mode = 1
 properties/11/path = NodePath("Mesh/Torso/Head/hands/RightHand:rotation")
 properties/11/spawn = true
 properties/11/replication_mode = 1
+properties/12/path = NodePath("RArmMarker:position")
+properties/12/spawn = true
+properties/12/replication_mode = 1
+properties/13/path = NodePath("LArmMarker:position")
+properties/13/spawn = true
+properties/13/replication_mode = 1
 
 [sub_resource type="SeparationRayShape3D" id="SeparationRayShape3D_jej6c"]
-length = 0.18026902
+length = 0.35628286
 
 [node name="CharacterBody3D" type="CharacterBody3D" node_paths=PackedStringArray("head", "hands", "camera", "procanim_handler", "torso", "RightShoulder", "LeftShoulder", "LeftHand", "RightHand", "RightArm", "LeftArm", "crosshair")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.8022772)
@@ -621,8 +627,8 @@ RightShoulder = NodePath("Mesh/Torso/Head/hands/RightShoulder")
 LeftShoulder = NodePath("Mesh/Torso/Head/hands/LeftShoulder")
 LeftHand = NodePath("Mesh/Torso/Head/hands/LeftHand")
 RightHand = NodePath("Mesh/Torso/Head/hands/RightHand")
-RightArm = NodePath("Mesh/Torso/RightArm")
-LeftArm = NodePath("Mesh/Torso/LeftArm")
+RightArm = NodePath("RArmMarker")
+LeftArm = NodePath("LArmMarker")
 crosshair = NodePath("CanvasLayer/Control")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -880,7 +886,7 @@ player = NodePath("../../../../../../..")
 metadata/_custom_type_script = "uid://cupjn1fl60xfj"
 
 [node name="RightHand" type="Node3D" parent="Mesh/Torso/Head/hands"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.24, 0.187)
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0.317, 0.639)
 
 [node name="gun" type="Node3D" parent="Mesh/Torso/Head/hands/RightHand" node_paths=PackedStringArray("magazine", "slide", "player", "HandleLeft", "HandleRight")]
 rotation_order = 0
@@ -894,7 +900,7 @@ aiming_fov_change = 80.0
 aiming_offset_x = 0.125
 aiming_offset_y = -0.025
 heftiness_lerp = 5.0
-aiming_position = Vector3(0, 0.24, 0.187)
+aiming_position = Vector3(0, 0.317, 0.639)
 player = NodePath("../../../../../..")
 HandleLeft = NodePath("HandleLeft")
 HandleRight = NodePath("HandleRight")
@@ -907,10 +913,10 @@ type = 0
 player = NodePath("../../../../../../..")
 
 [node name="HandleLeft" type="Marker3D" parent="Mesh/Torso/Head/hands/RightHand/gun"]
-transform = Transform3D(1, 1.400688e-19, 9.094947e-13, 1.4007944e-19, 1, -1.6940659e-21, -9.094947e-13, 8.6566767e-19, 1, -0.05093476, -0.21403328, -0.004786987)
+transform = Transform3D(0.9999998, 1.4006878e-19, 9.0949454e-13, 1.4007943e-19, 0.9999998, -1.6940656e-21, -9.0949454e-13, 8.6566757e-19, 0.9999998, 0.02388106, -0.12806833, -0.004999995)
 
 [node name="HandleRight" type="Marker3D" parent="Mesh/Torso/Head/hands/RightHand/gun"]
-transform = Transform3D(1, 1.4006887e-19, 1.8189894e-12, 1.4010074e-19, 1, -1.7364175e-18, -1.8189894e-12, -6.7762636e-21, 1, 0.03360521, -0.2799369, -0.0052722245)
+transform = Transform3D(0.9999998, 1.4006885e-19, 1.8189891e-12, 1.4010073e-19, 0.9999998, -1.7364173e-18, -1.8189891e-12, -6.7762624e-21, 0.9999998, -0.041262176, -0.18786478, -0.04837513)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Mesh/Torso/Head/hands/RightHand/gun"]
 libraries = {
@@ -918,7 +924,7 @@ libraries = {
 }
 
 [node name="m1911" type="Node3D" parent="Mesh/Torso/Head/hands/RightHand/gun"]
-transform = Transform3D(-0.132, -8.5931276e-08, 1.5934941e-06, -8.5931276e-08, 0.132, -1.1467653e-14, -1.5934941e-06, -1.0488236e-12, -0.132, 2.0767966e-06, -0.13658638, -0.16466963)
+transform = Transform3D(-0.091, -5.9240502e-08, 1.0985451e-06, -5.9240502e-08, 0.091, -7.90573e-15, -1.0985451e-06, -7.230526e-13, -0.091, 2.0767966e-06, -0.13658638, -0.16466963)
 
 [node name="Cube_003" type="MeshInstance3D" parent="Mesh/Torso/Head/hands/RightHand/gun/m1911"]
 transform = Transform3D(0.08728984, 0, 0, 0, 0.9396927, -0.13680798, 0, 0.34202, 0.37587702, 0.28690022, -0.3, -1.4999998)
@@ -951,6 +957,7 @@ mesh = SubResource("ArrayMesh_av7u3")
 skeleton = NodePath("")
 
 [node name="muzzleflash" type="Node3D" parent="Mesh/Torso/Head/hands/RightHand/gun"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.09218252)
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="Mesh/Torso/Head/hands/RightHand/gun/muzzleflash"]
 transform = Transform3D(1, 1.4006907e-19, -9.094947e-13, 0, 1, 4.5474735e-13, 0, -4.6616877e-13, 1, -2.9802322e-08, -2.9802322e-08, -0.5141344)
@@ -983,12 +990,14 @@ draw_pass_1 = SubResource("QuadMesh_4r5pv")
 replication_config = SubResource("SceneReplicationConfig_f1ej7")
 
 [node name="shoot" type="AudioStreamPlayer3D" parent="Mesh/Torso/Head/hands/RightHand/gun"]
+transform = Transform3D(1.2453302, 0, 0, 0, 1.2453302, 0, 0, 0, 1.2453302, 0, 0, -0.42455053)
 stream = ExtResource("15_qfm1y")
 
 [node name="casing" type="AudioStreamPlayer3D" parent="Mesh/Torso/Head/hands/RightHand/gun"]
 stream = ExtResource("16_fulsm")
 
 [node name="dry_shoot" type="AudioStreamPlayer3D" parent="Mesh/Torso/Head/hands/RightHand/gun"]
+transform = Transform3D(1.2453302, 0, 0, 0, 1.2453302, 0, 0, 0, 1.2453302, 0, 0, -0.092065215)
 stream = ExtResource("17_4r5pv")
 
 [node name="casing_shootout" type="Node3D" parent="Mesh/Torso/Head/hands/RightHand/gun"]
@@ -1233,14 +1242,14 @@ skin = SubResource("Skin_qw8nh")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.025889754, 0.76423, -0.9299722)
 root_bone = &"Bone.004"
 tip_bone = &"Bone.019"
-target_node = NodePath(".")
+target_node = NodePath("../../../../../../LArmMarker")
 script = ExtResource("20_a38lo")
 
 [node name="RArm" type="SkeletonIK3D" parent="Mesh/Nightmare/human/Armature/Skeleton3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0054132342, 0.8862566, -0.8430567)
 root_bone = &"Bone.012"
 tip_bone = &"Bone.020"
-target_node = NodePath(".")
+target_node = NodePath("../../../../../../RArmMarker")
 script = ExtResource("20_a38lo")
 
 [node name="Spine" type="SkeletonIK3D" parent="Mesh/Nightmare/human/Armature/Skeleton3D"]
@@ -1256,7 +1265,7 @@ transform = Transform3D(4.1925903e-09, 4.3509857e-08, -1, 0.9953895, -0.09591529
 root_bone = &"Bone.008"
 tip_bone = &"Bone.010"
 use_magnet = true
-magnet = Vector3(0.082, 0, -0.965)
+magnet = Vector3(0, 0, -0.965)
 target_node = NodePath("../../../../../../LLegMarker")
 script = ExtResource("20_a38lo")
 
@@ -1277,19 +1286,29 @@ shape = SubResource("CapsuleShape3D_tuyoq")
 replication_config = SubResource("SceneReplicationConfig_jej6c")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, -0.7640166, -0.35499695)
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, -0.4161975, -0.35499692)
 shape = SubResource("SeparationRayShape3D_jej6c")
 
-[node name="LLegMarker" type="Marker3D" parent="." node_paths=PackedStringArray("step_target", "adjacent_target")]
-transform = Transform3D(-0.06923417, -3.3139125e-10, -0.99760056, 0.9929877, -0.09605418, -0.06891406, -0.09582367, -0.9953764, 0.006650236, -0.15014578, -1.0089904, 1.8136408)
+[node name="LLegMarker" type="Marker3D" parent="." node_paths=PackedStringArray("step_target", "skeleton_ik", "adjacent_target")]
+transform = Transform3D(-0.06923416, -1.0710212e-08, -0.99760056, 0.99298763, -0.09605422, -0.06891404, -0.09582371, -0.99537635, 0.0066502434, -0.15014578, -1.0089904, 1.8136408)
 top_level = true
 script = ExtResource("9_ur7pv")
 step_target = NodePath("../Mesh/StepTargetHolder/LeftLegStepTarget")
+skeleton_ik = NodePath("../Mesh/Nightmare/human/Armature/Skeleton3D/LLeg")
 adjacent_target = NodePath("../RLegMarker")
 
-[node name="RLegMarker" type="Marker3D" parent="." node_paths=PackedStringArray("step_target", "adjacent_target")]
+[node name="RLegMarker" type="Marker3D" parent="." node_paths=PackedStringArray("step_target", "skeleton_ik", "adjacent_target")]
 transform = Transform3D(-0.049430147, -0.01413173, 0.9986776, -0.99639183, -0.068369396, -0.05028451, 0.06898959, -0.99756014, -0.010701232, 0.1993794, -1.0229874, 1.8219519)
 top_level = true
 script = ExtResource("9_ur7pv")
 step_target = NodePath("../Mesh/StepTargetHolder/RightLegStepTarget")
+skeleton_ik = NodePath("../Mesh/Nightmare/human/Armature/Skeleton3D/RLeg")
 adjacent_target = NodePath("../LLegMarker")
+
+[node name="RArmMarker" type="Marker3D" parent="."]
+transform = Transform3D(-0.069234155, -1.0710212e-08, -0.99760056, 0.9929876, -0.09605422, -0.06891404, -0.095823705, -0.99537635, 0.0066502434, 0.66256034, -0.881, 1.814)
+top_level = true
+
+[node name="LArmMarker" type="Marker3D" parent="."]
+transform = Transform3D(0.08881136, 0.22137108, 0.9711373, 0.9929876, -0.09605422, -0.068914026, 0.07802625, 0.97044784, -0.22834942, 0.031042814, 0.97470903, 1.4471358)
+top_level = true
